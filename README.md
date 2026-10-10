@@ -2,6 +2,16 @@
 
 Projeto .NET 8 para Windows x64 que migra o ciclo de conexão, memória remota, offsets, leitura de entidades e veículos, opções e janela de overlay do projeto C++.
 
+## Preview
+
+[![Assistir ao preview do VZX FiveM External](https://img.youtube.com/vi/aMILCVSQCb4/maxresdefault.jpg)](https://youtu.be/aMILCVSQCb4)
+
+▶️ [Assistir ao vídeo de preview](https://youtu.be/aMILCVSQCb4)
+
+## Comunidade
+
+💬 [Entrar no Discord](https://discord.gg/EhNzjXMBpJ)
+
 ## Compilar
 
 ```powershell
