@@ -1,0 +1,18 @@
+# Build output and IDE state
+[Bb]in/
+[Oo]bj/
+[Pp]ublish/
+.vs/
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Local ImGui state and user-specific runtime settings
+imgui.ini
+vzx_config.json
+**/vzx_config.json
+
+# OS files
+Thumbs.db
+Desktop.ini

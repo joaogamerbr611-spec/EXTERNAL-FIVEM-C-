@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <UseWindowsForms>true</UseWindowsForms>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <PlatformTarget>x64</PlatformTarget>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="ClickableTransparentOverlay" Version="11.1.0" />
+    <PackageReference Include="VzxWidgets" Version="1.1.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="assets\fonts\FontInter.hpp" Link="assets\FontInter.hpp" CopyToOutputDirectory="PreserveNewest" />
+    <Content Include="assets\nav\*.png" Link="assets\nav\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Remove="ControlPanelForm.cs" />
+    <Compile Remove="ControlPanelForm.Designer.cs" />
+  </ItemGroup>
+</Project>
