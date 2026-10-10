@@ -159,9 +159,10 @@ public sealed unsafe class ImGuiOverlay : Overlay
         var names = new[] { "crosshair.png", "eye.png", "players.png", "vehicle.png", "settings.png" };
         for (var index = 0; index < names.Length; index++)
         {
-            var path = Path.Combine(AppContext.BaseDirectory, "assets", "nav", names[index]);
-            if (!File.Exists(path)) continue;
-            using var icon = SixLabors.ImageSharp.Image.Load<Rgba32>(path);
+            var resourceName = $"assets.nav.{names[index]}";
+            using var stream = OpenEmbeddedAsset(resourceName);
+            if (stream is null) continue;
+            using var icon = SixLabors.ImageSharp.Image.Load<Rgba32>(stream);
             // The DirectX overlay uses a point sampler for texture images. Resize
             // once with a high-quality filter so the 512 px sources stay smooth
             // at their final 24 px navigation size.
@@ -185,15 +186,16 @@ public sealed unsafe class ImGuiOverlay : Overlay
                     }
                 }
             });
-            AddOrGetImagePointer(path, icon, true, out navIconTextures[index]);
+            AddOrGetImagePointer($"embedded://{resourceName}", icon, true, out navIconTextures[index]);
         }
     }
 
     private ImFontPtr LoadProjectFont(string fontName, ImFontConfigPtr config, float sizePixels)
     {
-        var path = Path.Combine(AppContext.BaseDirectory, "assets", "FontInter.hpp");
-        if (!File.Exists(path)) return default;
-        var source    = File.ReadAllText(path);
+        using var stream = OpenEmbeddedAsset("assets.fonts.FontInter.hpp");
+        if (stream is null) return default;
+        using var reader = new StreamReader(stream);
+        var source = reader.ReadToEnd();
         var sizeMatch = Regex.Match(source, $@"{fontName}_compressed_size\s*=\s*(\d+)");
         var dataMatch = Regex.Match(source, $@"{fontName}_compressed_data\s*\[[^\]]+\]\s*=\s*\{{(?<data>.*?)\}};", RegexOptions.Singleline);
         if (!sizeMatch.Success || !dataMatch.Success) return default;
@@ -204,6 +206,14 @@ public sealed unsafe class ImGuiOverlay : Overlay
         fixed (uint* pointer = data)
             return ImGui.GetIO().Fonts.AddFontFromMemoryCompressedTTF(
                 (IntPtr)pointer, int.Parse(sizeMatch.Groups[1].Value, CultureInfo.InvariantCulture), sizePixels, config);
+    }
+
+    private static Stream? OpenEmbeddedAsset(string suffix)
+    {
+        var assembly = typeof(ImGuiOverlay).Assembly;
+        var resourceName = assembly.GetManifestResourceNames()
+            .FirstOrDefault(name => name.EndsWith(suffix, StringComparison.OrdinalIgnoreCase));
+        return resourceName is null ? null : assembly.GetManifestResourceStream(resourceName);
     }
 
     // ──────────────────────────────────────────────────────────────────────────

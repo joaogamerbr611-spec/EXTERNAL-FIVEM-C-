@@ -13,8 +13,8 @@
     <PackageReference Include="VzxWidgets" Version="1.1.0" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\fonts\FontInter.hpp" Link="assets\FontInter.hpp" CopyToOutputDirectory="PreserveNewest" />
-    <Content Include="assets\nav\*.png" Link="assets\nav\%(Filename)%(Extension)" CopyToOutputDirectory="PreserveNewest" />
+    <EmbeddedResource Include="assets\fonts\FontInter.hpp" />
+    <EmbeddedResource Include="assets\nav\*.png" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="ControlPanelForm.cs" />
