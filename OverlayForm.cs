@@ -14,7 +14,7 @@ public sealed class OverlayForm : Form
     public OverlayForm(CheatController cheat)
     {
         this.cheat = cheat;
-        Text = "VZX FiveM External - C#";
+        Text = "DDL";
         FormBorderStyle = FormBorderStyle.None;
         ShowInTaskbar = false;
         TopMost = true;
