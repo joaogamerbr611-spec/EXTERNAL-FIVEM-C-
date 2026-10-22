@@ -14,7 +14,7 @@ public sealed class OverlayForm : Form
     public OverlayForm(CheatController cheat)
     {
         this.cheat = cheat;
-        Text = "VZX FiveM External - C#";
+        Text = "DDL";
         FormBorderStyle = FormBorderStyle.None;
         ShowInTaskbar = false;
         TopMost = true;
@@ -56,7 +56,7 @@ public sealed class OverlayForm : Form
         menu.Location = new Point(32, 32);
         menu.BackColor = Color.FromArgb(235, 12, 20, 33);
         menu.Visible = cheat.Settings.ShowMenu;
-        var title = new Label { Text = "VZX FiveM  |  C#", ForeColor = Color.White, Font = new Font("Segoe UI", 13, FontStyle.Bold), Location = new Point(16, 14), AutoSize = true };
+        var title = new Label { Text = "DDL"; ForeColor = Color.White, Font = new Font("Segoe UI", 13, FontStyle.Bold), Location = new Point(16, 14), AutoSize = true };
         menu.Controls.Add(title);
         AddToggle("ESP", 55, value => cheat.Settings.EspEnabled = value, cheat.Settings.EspEnabled);
         AddToggle("Box ESP", 84, value => cheat.Settings.EspBox = value, cheat.Settings.EspBox);
